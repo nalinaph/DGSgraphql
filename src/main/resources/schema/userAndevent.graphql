@@ -1,0 +1,42 @@
+scalar DateTime
+type User
+{
+    uId: Int
+    firstName:String,
+    secondName:String
+}
+
+type Event
+{
+    eId: Int,
+    eventName:String,
+    location:String,
+    organizer:String,,
+    attendees:Int,
+    dateTime:DateTime
+    duration:Int
+    user: User!
+
+}
+
+input EventInput {
+    eventName: String!
+    location: String
+    organizer: String
+    attendees: Int
+    dateTime: DateTime
+    duration: Int
+    uId: ID!
+}
+type Mutation {
+    createUser(userInput: UserInput): User!
+    createEvent(input: EventInput!): Event!
+    updateEvent(eid: ID!, input: EventInput!): Event!
+
+}
+
+input UserInput
+{
+    firstName:String,
+    secondName:String
+}

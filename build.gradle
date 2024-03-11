@@ -1,0 +1,57 @@
+
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.3'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'com.netflix.dgs.codegen' version '6.1.5'
+
+}
+
+group = 'com.assignmentevent'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation(platform('com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:8.3.1'))
+	implementation 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat:1.2.1.RELEASE'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+generateJava
+		{
+			packageName = 'com.assignmentevent.graphql.generated'
+			generateClient = true
+			typeMapping = ["Date" : "java.time.LocalDate",
+						   "NonNegativeInt": "java.lang.Integer",
+						   "DateTime"  : "java.time.OffsetDateTime"]
+		}
+
+
