@@ -1,4 +1,4 @@
-scalar DateTime
+
 type User
 {
     uId: Int
@@ -26,17 +26,26 @@ input EventInput {
     attendees: Int
     dateTime: DateTime
     duration: Int
-    uId: ID!
-}
-type Mutation {
-    createUser(userInput: UserInput): User!
-    createEvent(input: EventInput!): Event!
-    updateEvent(eid: ID!, input: EventInput!): Event!
-
+    uId: Int
 }
 
 input UserInput
 {
+    uId:Int,
     firstName:String,
     secondName:String
+}
+
+input EventFilterInputByDateRange {
+    startDate: DateTime
+    endDate: DateTime
+    minDuration: Int
+    maxDuration: Int
+}
+
+input EventFilterInput
+{
+    organizer:String
+    attendees:Int
+
 }

@@ -1,0 +1,19 @@
+scalar DateTime
+type Mutation {
+    createUser(userInput: UserInput): User!
+    createEvent(eventInput: EventInput!, uId:Int): Event!
+    updateEvent(eId: Int!, eventInput: EventInput!): Event!
+    deleteEvent(eId:ID!): Int
+
+}
+
+type Query
+{
+
+    getEventDetailById(eId: Int!): Event
+    listEventsByDateAndDuration(filter: EventFilterInputByDateRange): [Event]
+    listEventsByAttendeesAndOrganiser(criteria:EventFilterInput):[Event]
+
+
+}
+

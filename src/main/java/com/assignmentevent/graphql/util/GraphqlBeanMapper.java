@@ -1,6 +1,9 @@
 package com.assignmentevent.graphql.util;
 
+import com.assignmentevent.graphql.Datamodule.entity.EventsEntity;
 import com.assignmentevent.graphql.Datamodule.entity.UsersEntity;
+import com.assignmentevent.graphql.generated.types.Event;
+import com.assignmentevent.graphql.generated.types.EventInput;
 import com.assignmentevent.graphql.generated.types.User;
 import com.assignmentevent.graphql.generated.types.UserInput;
 import com.netflix.graphql.dgs.DgsComponent;
@@ -25,5 +28,29 @@ public class GraphqlBeanMapper {
         result1.setFirstName(userInput.getFirstName());
         result1.setSecondName(userInput.getSecondName());
         return result1;
+    }
+
+    public static Event mapToGraphEvent(EventsEntity original)
+    {
+        Event result = new Event();
+        result.setEId(original.getEventId());
+        result.setEventName(original.getEventName());
+        result.setLocation(original.getLocation());
+        result.setOrganizer(original.getOrganizer());
+        result.setDuration(original.getDuration());
+        result.setDateTime(original.getDateTime().atOffset(ZONE_OFFSET));
+        return result;
+    }
+
+    public static EventsEntity mapToEventEntity(EventInput eventInput)
+    {
+        EventsEntity result1 = new EventsEntity();
+        result1.setEventName(eventInput.getEventName());
+        result1.setLocation(eventInput.getLocation());
+        result1.setOrganizer(eventInput.getOrganizer());
+        result1.setDuration(eventInput.getDuration());
+        result1.setDateTime(eventInput.getDateTime().toLocalDateTime());
+        return  result1;
+
     }
 }

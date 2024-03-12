@@ -27,4 +27,5 @@ public class UserService {
         UsersEntity saveduser = userRepository.save(user);
         return GraphqlBeanMapper.mapToGraph((saveduser));
     }
+
 }
