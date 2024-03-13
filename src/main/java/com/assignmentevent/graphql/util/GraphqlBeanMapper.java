@@ -39,18 +39,21 @@ public class GraphqlBeanMapper {
         result.setOrganizer(original.getOrganizer());
         result.setDuration(original.getDuration());
         result.setDateTime(original.getDateTime().atOffset(ZONE_OFFSET));
+       // result.setUser(new User());
         return result;
     }
 
-    public static EventsEntity mapToEventEntity(EventInput eventInput)
+    public static EventsEntity mapToEventEntity(EventInput eventInput, UsersEntity usersEntity)
     {
         EventsEntity result1 = new EventsEntity();
+        result1.setUsersEntity(usersEntity);
         result1.setEventName(eventInput.getEventName());
         result1.setLocation(eventInput.getLocation());
         result1.setOrganizer(eventInput.getOrganizer());
         result1.setDuration(eventInput.getDuration());
-        result1.setDateTime(eventInput.getDateTime().toLocalDateTime());
+       // result1.setDateTime(eventInput.);
         return  result1;
 
     }
+
 }

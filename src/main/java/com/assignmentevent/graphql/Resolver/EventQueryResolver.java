@@ -10,6 +10,7 @@ import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @DgsComponent
@@ -29,17 +30,18 @@ public class EventQueryResolver {
 
     //Method to get list of events by Date and Duration range
 
-    @DgsQuery
-    public List<Event> listEventsByDateAndDuration(@InputArgument EventFilterInputByDateRange filter) {
-
-        LocalDateTime startDate = filter.getStartDate().toLocalDateTime();
-        LocalDateTime endDate = filter.getEndDate().toLocalDateTime();
-       int minDuration = filter.getMinDuration();
-        int maxDuration = filter.getMaxDuration();
-
-        List<EventsEntity> list = eventQueryService.listOfEventsByDateAndDuration(startDate, endDate, minDuration, maxDuration);
-         return list.stream().map(GraphqlBeanMapper::mapToGraphEvent).toList();
-    }
+//    @DgsQuery
+//    public List<Event> listEventsByDateAndDuration(@InputArgument EventFilterInputByDateRange filter) {
+//
+//     // LocalDateTime startDate = filter.getStartDate().toLocalDateTime();
+//        String startDate = String.valueOf(filter.getStartDate().toLocalDateTime()).toString();
+//        LocalDateTime endDate = filter.getEndDate().toLocalDateTime();
+//       int minDuration = filter.getMinDuration();
+//        int maxDuration = filter.getMaxDuration();
+//
+//        List<EventsEntity> list = eventQueryService.listOfEventsByDateAndDuration(startDate, endDate, minDuration, maxDuration);
+//         return list.stream().map(GraphqlBeanMapper::mapToGraphEvent).toList();
+//    }
 
 
 
