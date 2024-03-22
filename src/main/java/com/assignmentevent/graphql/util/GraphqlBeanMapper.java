@@ -37,8 +37,11 @@ public class GraphqlBeanMapper {
         result.setEventName(original.getEventName());
         result.setLocation(original.getLocation());
         result.setOrganizer(original.getOrganizer());
+        result.setAttendees(original.getNumberOfAttendees());
         result.setDuration(original.getDuration());
-        result.setDateTime(original.getDateTime().atOffset(ZONE_OFFSET));
+        result.setDate(original.getDateTime());
+
+      //  result.setDateTime(original.getDateTime().atOffset(ZONE_OFFSET));
        // result.setUser(new User());
         return result;
     }
@@ -50,7 +53,9 @@ public class GraphqlBeanMapper {
         result1.setEventName(eventInput.getEventName());
         result1.setLocation(eventInput.getLocation());
         result1.setOrganizer(eventInput.getOrganizer());
+        result1.setNumberOfAttendees(eventInput.getAttendees());
         result1.setDuration(eventInput.getDuration());
+        result1.setDateTime(eventInput.getDate());
        // result1.setDateTime(eventInput.);
         return  result1;
 

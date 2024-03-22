@@ -15,8 +15,8 @@ type Event
     eventName:String
     location:String
     organizer:String
-    attendees:Int,
-    dateTime:DateTime
+    attendees:Int
+    date:String
     duration:Int
     eventUser: User!
 
@@ -29,7 +29,7 @@ input EventInput {
     location: String
     organizer: String
     attendees: Int
-    date: DateTime
+    date: String
     duration: Int
 }
 
@@ -39,10 +39,19 @@ input UserInput
     firstName:String
     secondName:String
 }
+input UpdateInput
+{
+    eventName: String!
+    location: String
+    organizer: String
+    attendees: Int
+    date: String
+    duration: Int
+}
 
 input EventFilterInputByDateRange {
-    startDate: DateTime
-    endDate: DateTime
+    startDate: String
+    endDate: String
     minDuration: Int
     maxDuration: Int
 }

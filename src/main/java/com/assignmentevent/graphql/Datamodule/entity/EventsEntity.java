@@ -22,7 +22,7 @@ public class EventsEntity {
     private String location;
     private String organizer;
     private int numberOfAttendees;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private int duration;
     @ManyToOne
     @JoinColumn(name="u_id")

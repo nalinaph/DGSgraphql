@@ -9,10 +9,16 @@ import java.util.Optional;
 
 public interface EventRepository extends JpaRepository<EventsEntity,Integer> {
 
-    List<EventsEntity> findAllByDateTimeBetweenAndDurationBetween(
-            LocalDateTime startDate,
-            LocalDateTime endDate,
+    List<EventsEntity> findAllBydateTimeBetweenAnddurationBetween(
+            String startDate,
+            String endDate,
             int minDuration,
             int maxDuration
     );
+
+    List<EventsEntity> findAllByorganizerAndnumberOfAttendees(
+            String organizer,
+            Integer attendees
+    );
+
 }

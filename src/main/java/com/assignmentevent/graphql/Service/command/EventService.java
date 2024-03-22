@@ -6,6 +6,7 @@ import com.assignmentevent.graphql.Repository.EventRepository;
 import com.assignmentevent.graphql.Repository.UserRepository;
 import com.assignmentevent.graphql.generated.types.Event;
 import com.assignmentevent.graphql.generated.types.EventInput;
+import com.assignmentevent.graphql.generated.types.UpdateInput;
 import com.assignmentevent.graphql.generated.types.User;
 import com.assignmentevent.graphql.util.GraphqlBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,17 @@ import java.util.Optional;
 
 @Service
 public class EventService {
-    @Autowired
-    private EventRepository eventRepository;
-    @Autowired
-    private UserRepository userRepository;
+      private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
-    //public Event createEvent(EventInput eventInput, int userId)
+
+    public EventService(EventRepository eventRepository, UserRepository userRepository) {
+        this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
+    }
+
+
+    // create Event
     public Event createEvent(EventInput eventInput, Integer uId) {
         EventsEntity eventsEntity = new EventsEntity();
         // event = GraphqlBeanMapper.mapToEventEntity(eventInput);
@@ -32,18 +38,26 @@ public class EventService {
         return GraphqlBeanMapper.mapToGraphEvent(eventSaved);
     }
 
-    public Event updateEvent(int eId, EventInput eventInput) {
+    // Update Event
+    public Event updateEvent(int eId, UpdateInput udpateInput) {
         EventsEntity event = new EventsEntity();
         event = eventRepository.findById(eId).orElseThrow(
-                () -> new RuntimeException("Event id not found"));
+                ()-> new RuntimeException("Event Id not found")
+        );
 
-        // event = GraphqlBeanMapper.mapToEventEntity(eventInput,event);
-        if (eventInput.getEventName() != null)
-            event.setEventName(eventInput.getEventName());
-        if (eventInput.getLocation() != null)
-            event.setEventName(eventInput.getLocation());
-        if (eventInput.getOrganizer() != null)
-            event.setEventName(eventInput.getOrganizer());
+        if (udpateInput.getEventName() != null)
+            event.setEventName(udpateInput.getEventName());
+       if (udpateInput.getLocation() != null)
+            event.setLocation(udpateInput.getLocation());
+        if (udpateInput.getOrganizer() != null)
+            event.setOrganizer(udpateInput.getOrganizer());
+        if (udpateInput.getAttendees() != null)
+            event.setNumberOfAttendees(udpateInput.getAttendees());
+       if (udpateInput.getDuration() != null)
+            event.setDuration(udpateInput.getDuration());
+        event.setDateTime(udpateInput.getDate());
+
+
         return GraphqlBeanMapper.mapToGraphEvent(event);
 
     }

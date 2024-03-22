@@ -29,15 +29,21 @@ public class EventQueryService {
 
     //Method to get list of events by Date and Duration range
 
-    public List<EventsEntity> listOfEventsByDateAndDuration(LocalDateTime startDate, LocalDateTime endDate, int minDuration, int maxDuration)
+    public List<EventsEntity> listOfEventsByDateAndDuration(String startDate, String endDate, int minDuration, int maxDuration)
     {
 
-        List<EventsEntity> allEvents = eventRepository.findAllByDateTimeBetweenAndDurationBetween(startDate, endDate, minDuration, maxDuration);
+        List<EventsEntity> allEvents = eventRepository.findAllBydateTimeBetweenAnddurationBetween(startDate, endDate, minDuration, maxDuration);
 
         return allEvents;
 
 
     }
 
+      // List of Events By organizer and attendees Range
+
+    public List<EventsEntity> listEventsByDateAndDuration(String organizer, Integer attendees) {
+        List<EventsEntity> allEvents1=eventRepository.findAllByorganizerAndnumberOfAttendees(organizer,attendees);
+        return allEvents1;
 
     }
+}
